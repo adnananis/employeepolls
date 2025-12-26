@@ -50,6 +50,7 @@ A web application for internal employee use that enables collaboration and trans
    ```
    http://localhost:5173
    ```
+   (Note: If port 5173 is in use, Vite will automatically use the next available port)
 
 ## Available Scripts
 

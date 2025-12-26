@@ -9,13 +9,23 @@ const QuestionDetails = () => {
   const dispatch = useAppDispatch()
   const authedUser = useSelector((state: RootState) => state.authedUser)
   const users = useSelector((state: RootState) => state.users)
-  const questions = useSelector((state: RootState) => state.questions)
+  const questions = useSelector((state: RootState) => state.questions.questions)
+  const questionsLoading = useSelector((state: RootState) => state.questions.loading)
+
+  if (questionsLoading) {
+    return <div className="page-container"><div className="text-center">Loading...</div></div>
+  }
 
   if (!id || !questions[id]) {
     return <Navigate to="/404" />
   }
 
   const question = questions[id]
+
+  // Ensure user data is loaded
+  if (!users[question.author] || (authedUser && !users[authedUser])) {
+    return <div className="page-container"><div className="text-center">Loading...</div></div>
+  }
   const author = users[question.author]
   const answered = authedUser && users[authedUser] && users[authedUser].answers[id]
   const userAnswer = answered ? users[authedUser].answers[id] : null

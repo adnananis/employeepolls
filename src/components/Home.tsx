@@ -7,9 +7,9 @@ const Home = () => {
   const [showAnswered, setShowAnswered] = useState(false)
   const authedUser = useSelector((state: RootState) => state.authedUser)
   const users = useSelector((state: RootState) => state.users)
-  const questions = useSelector((state: RootState) => state.questions)
+  const questions = useSelector((state: RootState) => state.questions.questions)
 
-  if (!authedUser) return null
+  if (!authedUser || !users[authedUser]) return null
 
   const user = users[authedUser]
   const answeredQids = Object.keys(user.answers)

@@ -12,7 +12,7 @@ const Nav = () => {
     dispatch(setAuthedUser(null))
   }
 
-  if (!authedUser) return null
+  if (!authedUser || !users[authedUser]) return null
 
   const user = users[authedUser]
 

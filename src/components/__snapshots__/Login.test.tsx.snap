@@ -64,13 +64,6 @@ exports[`Login Component > should match snapshot 1`] = `
           Sign In
         </button>
       </form>
-      <div
-        class="mt-6 text-center text-sm text-gray-500"
-      >
-        <p>
-          Demo users available for testing
-        </p>
-      </div>
     </div>
   </div>
 </div>

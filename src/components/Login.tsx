@@ -6,6 +6,7 @@ import type { RootState } from '../store'
 
 const Login = () => {
   const users = useSelector((state: RootState) => state.users)
+  const questions = useSelector((state: RootState) => state.questions.questions)
   const authedUser = useSelector((state: RootState) => state.authedUser)
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -14,11 +15,23 @@ const Login = () => {
 
   useEffect(() => {
     if (authedUser) {
-      // Redirect to the intended page or home if no intended page
+      // Get the intended destination
       const from = location.state?.from?.pathname || '/'
+
+      // If the intended destination is a question route, validate it exists
+      if (from.startsWith('/questions/')) {
+        const questionId = from.split('/questions/')[1]
+        if (!questionId || !questions[questionId]) {
+          // Question doesn't exist, redirect to 404
+          navigate('/404', { replace: true })
+          return
+        }
+      }
+
+      // Redirect to the intended page or home if no intended page
       navigate(from, { replace: true })
     }
-  }, [authedUser, navigate, location])
+  }, [authedUser, navigate, location, questions])
 
   const handleLogin = () => {
     if (selectedUser) {

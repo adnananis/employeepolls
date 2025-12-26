@@ -18,20 +18,32 @@ export const saveQuestionAnswer = createAsyncThunk('questions/saveAnswer', async
   return { authedUser, qid, answer }
 })
 
+interface QuestionsState {
+  questions: Questions
+  loading: boolean
+}
+
 const questionsSlice = createSlice({
   name: 'questions',
-  initialState: {} as Questions,
+  initialState: { questions: {}, loading: true } as QuestionsState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchQuestions.fulfilled, (_, action) => {
-      return action.payload
+    builder.addCase(fetchQuestions.pending, (state) => {
+      state.loading = true
+    })
+    builder.addCase(fetchQuestions.fulfilled, (state, action) => {
+      state.questions = action.payload
+      state.loading = false
+    })
+    builder.addCase(fetchQuestions.rejected, (state) => {
+      state.loading = false
     })
     builder.addCase(saveQuestion.fulfilled, (state, action) => {
-      state[action.payload.id] = action.payload
+      state.questions[action.payload.id] = action.payload
     })
     builder.addCase(saveQuestionAnswer.fulfilled, (state, action) => {
       const { qid, answer } = action.payload
-      state[qid][answer].votes.push(action.payload.authedUser)
+      state.questions[qid][answer].votes.push(action.payload.authedUser)
     })
   },
 })
