@@ -1,8 +1,8 @@
 import { describe, test, expect } from 'vitest'
-import { render, fireEvent, waitFor } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit'
-import { MemoryRouter, Route, Routes } from 'react-router-dom'
+import { MemoryRouter } from 'react-router-dom'
 import NewQuestion from './NewQuestion'
 import authedUserReducer from '../features/authedUserSlice'
 import usersReducer from '../features/usersSlice'
@@ -28,7 +28,7 @@ const createMockStore = () => {
     preloadedState: {
       authedUser: 'sarahedo',
       users: mockUsers,
-      questions: {},
+      questions: { questions: {}, loading: false },
     },
   })
 }

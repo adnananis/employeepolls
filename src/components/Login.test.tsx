@@ -35,7 +35,7 @@ const createMockStore = (initialState = {}) => {
     preloadedState: {
       authedUser: null,
       users: mockUsers,
-      questions: {},
+      questions: { questions: {}, loading: false },
       ...initialState,
     },
   })

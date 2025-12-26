@@ -7,8 +7,9 @@ import Leaderboard from './Leaderboard'
 import authedUserReducer from '../features/authedUserSlice'
 import usersReducer from '../features/usersSlice'
 import questionsReducer from '../features/questionsSlice'
+import type { Users } from '../types'
 
-const mockUsers = {
+const mockUsers: Users = {
   sarahedo: {
     id: 'sarahedo',
     name: 'Sarah Edo',
@@ -48,7 +49,7 @@ const createMockStore = () => {
     preloadedState: {
       authedUser: 'sarahedo',
       users: mockUsers,
-      questions: {},
+      questions: { questions: {}, loading: false },
     },
   })
 }

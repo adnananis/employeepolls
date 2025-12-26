@@ -35,7 +35,7 @@ const createMockStore = (initialState = {}) => {
     preloadedState: {
       authedUser: null,
       users: mockUsers,
-      questions: {},
+      questions: { questions: {}, loading: false },
       ...initialState,
     },
   })
@@ -76,7 +76,6 @@ describe('Login Component - DOM Tests', () => {
       </Provider>
     )
 
-    const button = getByRole('button', { name: /sign in/i })
     const select = getByRole('combobox') as HTMLSelectElement
 
     // Button should be enabled (HTML5 validation will prevent submission)
