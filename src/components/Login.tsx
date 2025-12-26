@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { setAuthedUser } from '../features/authedUserSlice'
 import type { RootState } from '../store'
 
@@ -9,18 +9,20 @@ const Login = () => {
   const authedUser = useSelector((state: RootState) => state.authedUser)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const location = useLocation()
   const [selectedUser, setSelectedUser] = useState('')
 
   useEffect(() => {
     if (authedUser) {
-      navigate('/')
+      // Redirect to the intended page or home if no intended page
+      const from = location.state?.from?.pathname || '/'
+      navigate(from, { replace: true })
     }
-  }, [authedUser, navigate])
+  }, [authedUser, navigate, location])
 
   const handleLogin = () => {
     if (selectedUser) {
       dispatch(setAuthedUser(selectedUser))
-      navigate('/')
     }
   }
 
