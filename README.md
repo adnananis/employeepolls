@@ -22,17 +22,34 @@ A web application for internal employee use that enables collaboration and trans
 
 ## Getting Started
 
-1. Install dependencies:
+### Prerequisites
+- Node.js (version 16 or higher)
+- npm or yarn package manager
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/employee-polls.git
+   cd employee-polls
+   ```
+
+   Or **download the ZIP file** from GitHub and extract it to your desired location.
+
+2. **Install dependencies:**
    ```bash
    npm install
    ```
 
-2. Start the development server:
+3. **Start the development server:**
    ```bash
    npm start
    ```
 
-3. Open your browser and navigate to `http://localhost:5173`
+4. **Open your browser and navigate to:**
+   ```
+   http://localhost:5173
+   ```
 
 ## Available Scripts
 
